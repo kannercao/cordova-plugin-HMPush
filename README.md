@@ -11,7 +11,7 @@
 
 #### 安装命令
 ```bash
-cordova plugin add Your_Plugin_Path --nofetch --variable HW_APPKEY=YOUR_HW_APPKEY --variable MI_PUSH_APPID=YOUR_MI_PUSH_APPID --variable MI_PUSH_APPKEY=
+cordova plugin add Your_Plugin_Path --nofetch --variable HW_PUSH_APPID=YOUR_HW_PUSH_APPID --variable MI_PUSH_APPID=YOUR_MI_PUSH_APPID --variable MI_PUSH_APPKEY=
 =YOUR_MI_PUSH_APPKEY
 ```
 
