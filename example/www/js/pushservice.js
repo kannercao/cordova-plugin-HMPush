@@ -75,11 +75,11 @@ angular.module("starter.services").factory("JPushService", [
           };
           if (ionic.Platform.isIOS()) {
             //ios不同于android，需要注册apns服务
-            $window.plugins.NXTPlugin.startJPushSDK();
+            $window.plugins.HMPlugin.startJPushSDK();
           }
           //本功能是一个完全本地的状态操作，也就是说：停止推送服务的状态不会保存到服务器上。
           //推送服务停止期间推送的消息，恢复推送服务后，如果推送的消息还在保留的时长范围内，则客户端是会收到离线消息。
-          $window.plugins.NXTPlugin.init();
+          $window.plugins.HMPlugin.init();
           //设置tag和Alias触发事件处理
           documentBindEventListener("jpush.setTagsWithAlias", config.stac);
           documentBindEventListener("jpush.openNotification", config.onc);
@@ -89,10 +89,10 @@ angular.module("starter.services").factory("JPushService", [
             alert("我收到华为 token 啦:" + token);
           });
           //开发周期建议打开debug模式，可以获得额外帮助
-          $window.plugins.NXTPlugin.setDebugMode(true);
+          $window.plugins.HMPlugin.setDebugMode(true);
           //以下仅限android，插件内部做了平台判断
-          $window.plugins.NXTPlugin.setBasicPushNotificationBuilder(); //声音，振动提示等,
-          $window.plugins.NXTPlugin.requestPermission(); //用于在 Android 6.0 及以上系统，申请一些权限
+          $window.plugins.HMPlugin.setBasicPushNotificationBuilder(); //声音，振动提示等,
+          $window.plugins.HMPlugin.requestPermission(); //用于在 Android 6.0 及以上系统，申请一些权限
           _setAlias("9876");
         },
         false
@@ -111,7 +111,7 @@ angular.module("starter.services").factory("JPushService", [
        * 建议设置一个 UI 界面， 提醒用户在 设置－通知 中关闭推送服务。
        * */
     var _stopPush = function() {
-      $window.plugins.NXTPlugin.stopPush();
+      $window.plugins.HMPlugin.stopPush();
     };
 
     /**
@@ -120,7 +120,7 @@ angular.module("starter.services").factory("JPushService", [
        * @description iOS平台:重新去 APNS 注册。
        * */
     var _resumePush = function() {
-      $window.plugins.NXTPlugin.resumePush();
+      $window.plugins.HMPlugin.resumePush();
     };
 
     /**
@@ -131,7 +131,7 @@ angular.module("starter.services").factory("JPushService", [
        * ps:调用stopPush关闭之后，不会马上生效
        * */
     var _isPushStopped = function(fun) {
-      $window.plugins.NXTPlugin.isPushStopped(fun);
+      $window.plugins.HMPlugin.isPushStopped(fun);
     };
 
     /**
@@ -141,7 +141,7 @@ angular.module("starter.services").factory("JPushService", [
        * @param 参数是回调函数，result结果为RegistrationID
        * */
     var _getRegistrationID = function(fun) {
-      window.plugins.NXTPlugin.getRegistrationID(fun);
+      window.plugins.HMPlugin.getRegistrationID(fun);
     };
 
     /**
@@ -157,7 +157,7 @@ angular.module("starter.services").factory("JPushService", [
        * @alias 参数类型为字符串。空字符串 （""）表示取消之前的设置。
        * */
     var _setAlias = function(alias) {
-      $window.plugins.NXTPlugin.setAlias(alias);
+      $window.plugins.HMPlugin.setAlias(alias);
     };
 
     /**
@@ -169,12 +169,12 @@ angular.module("starter.services").factory("JPushService", [
        * @description 单个设备最多支持设置 100 个 tag，App 全局 tag 数量无限制。
        * */
     var _setTags = function(tags) {
-      $window.plugins.NXTPlugin.setTags(tags);
+      $window.plugins.HMPlugin.setTags(tags);
     };
 
     //设置标签和别名
     var _setTagsWithAlias = function(tags, alias) {
-      $window.plugins.NXTPlugin.setTagsWithAlias(tags, alias);
+      $window.plugins.HMPlugin.setTagsWithAlias(tags, alias);
     };
 
     /**
@@ -184,20 +184,20 @@ angular.module("starter.services").factory("JPushService", [
        * @param 参数是回调方法，result状态值
        * */
     var _getUserNotificationSettings = function(fun) {
-      window.plugins.NXTPlugin.getUserNotificationSettings(fun);
+      window.plugins.HMPlugin.getUserNotificationSettings(fun);
     };
 
     var _clearLocalNotifications = function() {
-      window.plugins.NXTPlugin.clearLocalNotifications();
+      window.plugins.HMPlugin.clearLocalNotifications();
     };
 
     // iOS methods
     var _setBadge = function(value) {
-      window.plugins.NXTPlugin.setBadge(value);
+      window.plugins.HMPlugin.setBadge(value);
     };
 
     var _resetBadge = function() {
-      window.plugins.NXTPlugin.resetBadge();
+      window.plugins.HMPlugin.resetBadge();
     };
 
     return {

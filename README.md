@@ -7,7 +7,7 @@
 #### 安装说明
 * 安装插件时需要填写小米推送对应的 APPKEY 与 APPID，参考 plugin.xml 中 `$MI_PUSH_APPID` 与 `$MI_PUSH_APPKEY`
 * 华为需要填写APP_ID，初次使用时需要上传 HUAWEI TOKEN 至服务端
-* 具体支持的功能参见: www/NXTPlugin.js
+* 具体支持的功能参见: www/HMPlugin.js
 
 #### 安装命令
 ```bash

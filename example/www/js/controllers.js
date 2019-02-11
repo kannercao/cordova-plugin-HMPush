@@ -26,7 +26,6 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
   alert('before init!');
-   // $window.plugins.NXTPlugin.init();
-
+   // $window.plugins.HMPlugin.init();
    JPushService.init();
 });

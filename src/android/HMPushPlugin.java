@@ -29,17 +29,17 @@ import com.nxt.push.util.RomTypeUtil;
 import com.nxt.push.sdk.NXTPushManager;
 import com.nxt.push.sdk.NXTPushClient;
 
-public class NXTPushPlugin extends CordovaPlugin {
+public class HMPushPlugin extends CordovaPlugin {
 
-  private static final String TAG = "NXTPushPlugin";
+  private static final String TAG = "HMPushPlugin";
 
   private Context mContext;
 
   private static String jsCode = null;
-  private static NXTPushPlugin instance;
+  private static HMPushPlugin instance;
   private static Activity cordovaActivity;
 
-  public NXTPushPlugin() {
+  public HMPushPlugin() {
     instance = this;
   }
 
@@ -65,8 +65,8 @@ public class NXTPushPlugin extends CordovaPlugin {
         @Override
         public void run() {
           try {
-            Method method = NXTPushPlugin.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class);
-            method.invoke(NXTPushPlugin.this, data, callbackContext);
+            Method method = HMPushPlugin.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class);
+            method.invoke(HMPushPlugin.this, data, callbackContext);
           } catch (Exception e) {
             NXTReceiver.pushLog(e.toString());
           }
@@ -82,7 +82,7 @@ public class NXTPushPlugin extends CordovaPlugin {
       // NXTPushManager.init(cordovaActivity, mContext);
       NXTReceiver.pushLog("NXTPush.init -> do last jscode: " + (jsCode == null ? "null" : jsCode));
       if(jsCode != null){ 
-        NXTPushPlugin.runJSOnUiThread(jsCode, false);
+        HMPushPlugin.runJSOnUiThread(jsCode, false);
         jsCode = null;
       }
       callbackContext.success(RomTypeUtil.isEMUI() ? "HW":"MI");
@@ -101,7 +101,7 @@ public class NXTPushPlugin extends CordovaPlugin {
         NXTPushManager.setAlias(mContext, "USELESS", data.getString(0));
     } catch (JSONException e) {
       e.printStackTrace();
-      callbackContext.error("Error reading NXTPushPlugin setAlias JSON");
+      callbackContext.error("Error reading HMPushPlugin setAlias JSON");
     }
   }
 

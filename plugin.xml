@@ -2,13 +2,14 @@
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-  id="nxtpush-cordova-plugin"
-  version="1.0.4">
-    <name>NXTPush</name>
-    <description>NXTPush for cordova plugin</description>
-    <author>NXTPush</author>
-    <keywords>NXTPush,push</keywords>
+  id="cordova-plugin-HMPush"
+  version="1.0.0">
+    <name>HMPush</name>
+    <description>HMPush for cordova plugin</description>
+    <author>HMPush</author>
+    <keywords>HMPush,push</keywords>
     <license>MIT License</license>
+    <preference name="HW_PUSH_APPID" />
     <preference name="MI_PUSH_APPID" />
     <preference name="MI_PUSH_APPKEY" />
     <engines>
@@ -16,13 +17,13 @@
     </engines>
     <!-- dependencies -->
     <dependency id="cordova-plugin-device" />
-    <js-module src="www/NXTPlugin.js" name="NXTPlugin">
-        <clobbers target="window.plugins.NXTPlugin" />
+    <js-module src="www/HMPlugin.js" name="HMPlugin">
+        <clobbers target="window.plugins.HMPlugin" />
     </js-module>
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="NXTPushPlugin">
-                <param name="android-package" value="com.eegrid.phonegap.NXTPushPlugin" />
+            <feature name="HMPushPlugin">
+                <param name="android-package" value="com.eegrid.phonegap.HMPushPlugin" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -260,7 +261,7 @@
         <source-file src="src/android/push_lib/agent/common/handler/ICallbackResult.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
         <!-- package com.eegrid.phonegap; -->
         <source-file src="src/android/JSRunner.java" target-dir="src/com/eegrid/phonegap" />
-        <source-file src="src/android/NXTPushPlugin.java" target-dir="src/com/eegrid/phonegap" />
+        <source-file src="src/android/HMPushPlugin.java" target-dir="src/com/eegrid/phonegap" />
         <!-- package com.nxt.push.receiver; -->
         <source-file src="src/android/push_lib/receiver/HuaWeiReceiver.java" target-dir="src/com/nxt/push/receiver" />
         <source-file src="src/android/push_lib/receiver/HuaWeiEventReceiver.java" target-dir="src/com/nxt/push/receiver" />
