@@ -1,33 +1,38 @@
 #!/usr/bin/env node
 
-module.exports = function(context) {
+module.exports = function (context) {
 
-  var fs = context.requireCordovaModule('fs'),
-    path = context.requireCordovaModule('path');
+    console.log('--------> hook application....');
 
-  var platformRoot = path.join(context.opts.projectRoot, 'platforms/android');
+    var fs = context.requireCordovaModule('fs'),
+        path = context.requireCordovaModule('path');
 
+    var platformRoot = path.join(context.opts.projectRoot, 'platforms/android/app/src/main');
+    var manifestFile = path.join(platformRoot, 'AndroidManifest.xml');
 
-  var manifestFile = path.join(platformRoot, 'AndroidManifest.xml');
+    console.log('--------> manifestFile: ' + manifestFile);
 
-  if (fs.existsSync(manifestFile)) {
+    if (fs.existsSync(manifestFile)) {
 
-    fs.readFile(manifestFile, 'utf8', function (err,data) {
-      if (err) {
-        throw new Error('Unable to find AndroidManifest.xml: ' + err);
-      }
+        console.log('--------> manifestFile: reading....');
 
-      var appClass = 'com.nxt.MyApplication';
+        fs.readFile(manifestFile, 'utf8', function (err, data) {
+            if (err) {
+                throw new Error('Unable to find AndroidManifest.xml: ' + err);
+            }
 
-      if (data.indexOf(appClass) == -1) {
+            var appClass = 'com.nxt.MyApplication';
 
-        var result = data.replace(/<application/g, '<application android:name="' + appClass + '"');
+            if (data.indexOf(appClass) == -1) {
 
-        fs.writeFile(manifestFile, result, 'utf8', function (err) {
-          if (err) throw new Error('Unable to write into AndroidManifest.xml: ' + err);
-        })
-      }
-    });
-  }
+                var result = data.replace(/<application/g, '<application android:name="' + appClass + '"');
 
+                fs.writeFile(manifestFile, result, 'utf8', function (err) {
+                    if (err) throw new Error('Unable to write into AndroidManifest.xml: ' + err);
+                })
+            }
+        });
+    } else {
+        console.log('--------> manifestFile: can not reading....');
+    }
 };
