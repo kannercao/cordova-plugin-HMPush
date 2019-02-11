@@ -1,67 +1,63 @@
 {
-  "_from": "nxtpush-cordova-plugin@1.0.4",
-  "_id": "nxtpush-cordova-plugin@1.0.4",
+  "_from": "cordova-plugin-HMPush@1.0.0",
+  "_id": "cordova-plugin-HMPush@1.0.0",
   "_inBundle": false,
   "_integrity": "sha1-B3Hp2H7CC6WWN+rzEIlmll8qqnY=",
-  "_location": "/nxtpush-cordova-plugin",
+  "_location": "/cordova-plugin-HMPush",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "nxtpush-cordova-plugin@1.0.4",
-    "name": "nxtpush-cordova-plugin",
-    "escapedName": "nxtpush-cordova-plugin",
-    "rawSpec": "1.0.4",
+    "raw": "cordova-plugin-HMPush@1.0.0",
+    "name": "cordova-plugin-HMPush",
+    "escapedName": "cordova-plugin-HMPush",
+    "rawSpec": "1.0.0",
     "saveSpec": null,
-    "fetchSpec": "1.0.4"
+    "fetchSpec": "1.0.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/nxtpush-cordova-plugin/-/nxtpush-cordova-plugin-1.0.4.tgz",
+  "_resolved": "",
   "_shasum": "0771e9d87ec20ba59637eaf3108966965f2aaa76",
-  "_spec": "nxtpush-cordova-plugin@1.0.4",
+  "_spec": "cordova-plugin-HMPush@1.0.0",
   "_where": "D:\\work-shine\\txxmapp",
   "author": {
     "name": "yipeng"
   },
   "bugs": {
-    "url": "https://github.com/pengkobe/NXT-Cordova-PushPlugin/issues"
+    "url": "https://github.com/kannercao/cordova-plugin-HMPush/issues"
   },
   "bundleDependencies": false,
   "cordova": {
-    "id": "nxtpush-cordova-plugin",
+    "id": "cordova-plugin-HMPush",
     "platforms": [
-      "ios",
       "android"
     ]
   },
   "dependencies": {
-    "cordova-plugin-device": "*",
-    "cordova-plugin-jcore": "1.1.4"
+    "cordova-plugin-device": "*"
   },
   "deprecated": false,
-  "description": "HUAWEI PUSH & XIAOMI PUSH & JPUSH for cordova plugin",
+  "description": "HUAWEI PUSH & XIAOMI PUSH for cordova plugin",
   "engines": [
     {
       "name": "cordova",
       "version": ">=4.0"
     }
   ],
-  "homepage": "https://github.com/pengkobe/NXT-Cordova-PushPlugin#readme",
+  "homepage": "https://github.com/kannercao/cordova-plugin-HMPush#readme",
   "keywords": [
-    "nxtpush",
     "push",
     "ecosystem:cordova",
-    "cordova-ios",
     "cordova-android"
   ],
   "license": "MIT",
-  "name": "nxtpush-cordova-plugin",
+  "name": "cordova-plugin-HMPush",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pengkobe/NXT-Cordova-PushPlugin.git"
+    "url": "git+https://github.com/kannercao/cordova-plugin-HMPush.git"
   },
-  "version": "1.0.4"
+  "version": "1.0.0"
 }
