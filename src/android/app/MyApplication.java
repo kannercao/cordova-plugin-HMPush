@@ -1,4 +1,4 @@
-package com.xmtx.test;
+package com.nxt;
 
 import android.app.Application;
 

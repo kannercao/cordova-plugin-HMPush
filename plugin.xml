@@ -21,13 +21,13 @@
         <clobbers target="window.plugins.HMPlugin" />
     </js-module>
     <platform name="android">
+        <hook type="after_prepare" src="src/scripts/hook_application.js" />
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="HMPushPlugin">
                 <param name="android-package" value="com.eegrid.phonegap.HMPushPlugin" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            <application android:name=".MyApplication" />
             <!-- 推送权限 -->
             <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -261,7 +261,7 @@
         <source-file src="src/android/push_lib/agent/common/handler/ICallbackCode.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
         <source-file src="src/android/push_lib/agent/common/handler/ICallbackResult.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
         <!-- package com.xmtx.test; -->
-        <source-file src="src/android/app/MyApplication.java" target-dir="src/com/xmtx/test" />
+        <source-file src="src/android/app/MyApplication.java" target-dir="src/com/nxt" />
         <!-- package com.eegrid.phonegap; -->
         <source-file src="src/android/JSRunner.java" target-dir="src/com/eegrid/phonegap" />
         <source-file src="src/android/HMPushPlugin.java" target-dir="src/com/eegrid/phonegap" />
