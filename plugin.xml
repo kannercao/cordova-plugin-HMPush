@@ -27,7 +27,8 @@
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
-            <!-- 极光推送权限 -->
+            <application android:name=".MyApplication" />
+            <!-- 推送权限 -->
             <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.VIBRATE" />
@@ -259,6 +260,8 @@
         <source-file src="src/android/push_lib/agent/common/handler/ConnectHandler.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
         <source-file src="src/android/push_lib/agent/common/handler/ICallbackCode.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
         <source-file src="src/android/push_lib/agent/common/handler/ICallbackResult.java" target-dir="src/com/huawei/android/hms/agent/common/handler" />
+        <!-- package com.xmtx.test; -->
+        <source-file src="src/android/app/MyApplication.java" target-dir="src/com/xmtx/test" />
         <!-- package com.eegrid.phonegap; -->
         <source-file src="src/android/JSRunner.java" target-dir="src/com/eegrid/phonegap" />
         <source-file src="src/android/HMPushPlugin.java" target-dir="src/com/eegrid/phonegap" />

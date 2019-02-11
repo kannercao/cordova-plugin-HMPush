@@ -73,10 +73,7 @@ angular.module("starter.services").factory("JPushService", [
             onc: openNotificationCallback,
             rnc: receiveNotificationCallback
           };
-          if (ionic.Platform.isIOS()) {
-            //ios不同于android，需要注册apns服务
-            $window.plugins.HMPlugin.startJPushSDK();
-          }
+
           //本功能是一个完全本地的状态操作，也就是说：停止推送服务的状态不会保存到服务器上。
           //推送服务停止期间推送的消息，恢复推送服务后，如果推送的消息还在保留的时长范围内，则客户端是会收到离线消息。
           $window.plugins.HMPlugin.init();
