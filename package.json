@@ -1,0 +1,67 @@
+{
+  "_from": "nxtpush-cordova-plugin@1.0.4",
+  "_id": "nxtpush-cordova-plugin@1.0.4",
+  "_inBundle": false,
+  "_integrity": "sha1-B3Hp2H7CC6WWN+rzEIlmll8qqnY=",
+  "_location": "/nxtpush-cordova-plugin",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "nxtpush-cordova-plugin@1.0.4",
+    "name": "nxtpush-cordova-plugin",
+    "escapedName": "nxtpush-cordova-plugin",
+    "rawSpec": "1.0.4",
+    "saveSpec": null,
+    "fetchSpec": "1.0.4"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nxtpush-cordova-plugin/-/nxtpush-cordova-plugin-1.0.4.tgz",
+  "_shasum": "0771e9d87ec20ba59637eaf3108966965f2aaa76",
+  "_spec": "nxtpush-cordova-plugin@1.0.4",
+  "_where": "D:\\work-shine\\txxmapp",
+  "author": {
+    "name": "yipeng"
+  },
+  "bugs": {
+    "url": "https://github.com/pengkobe/NXT-Cordova-PushPlugin/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "nxtpush-cordova-plugin",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-plugin-device": "*",
+    "cordova-plugin-jcore": "1.1.4"
+  },
+  "deprecated": false,
+  "description": "HUAWEI PUSH & XIAOMI PUSH & JPUSH for cordova plugin",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=4.0"
+    }
+  ],
+  "homepage": "https://github.com/pengkobe/NXT-Cordova-PushPlugin#readme",
+  "keywords": [
+    "nxtpush",
+    "push",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "nxtpush-cordova-plugin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengkobe/NXT-Cordova-PushPlugin.git"
+  },
+  "version": "1.0.4"
+}
