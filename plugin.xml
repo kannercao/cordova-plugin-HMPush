@@ -68,7 +68,7 @@
             Format android:value= "appid=xxxxxx"-->
             <meta-data
             android:name="com.huawei.hms.client.appid"
-            android:value="appid=100619847"/>
+            android:value="appid=$HW_PUSH_APPID"/>
             <!-- 接入HMSSDK 需要注册的provider，authorities 一定不能与其他应用一样，所以这边 push 要替换上您应用的包名
             Access HMSSDK need to register provider,authorities must not be the same as other applications, so this side ${package_name} to replace the package name you applied-->
             <provider
