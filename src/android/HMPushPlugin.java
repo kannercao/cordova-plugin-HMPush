@@ -135,11 +135,11 @@ public class HMPushPlugin extends CordovaPlugin {
   }
 
   void getRegistrationID(JSONArray data, CallbackContext callbackContext) {
-    if (RomTypeUtil.isEMUI()) {
+    if (RomTypeUtil.isEMUI() || RomTypeUtil.isMIUI()) {
       String hwToken = NXTPushManager.getToken(mContext);
       callbackContext.success(hwToken);
     }else{
-      callbackContext.success("is not hw phone.");
+      callbackContext.success("not support phone.");
     }
   }
 
