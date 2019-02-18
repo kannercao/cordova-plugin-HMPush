@@ -79,12 +79,16 @@ public class HMPushPlugin extends CordovaPlugin {
   void init(JSONArray data, CallbackContext callbackContext) {
     if (RomTypeUtil.isEMUI() || RomTypeUtil.isMIUI()) {
       // 注册华为和小米
-      NXTPushManager.init(cordovaActivity, mContext);
+      if(RomTypeUtil.isEMUI()){
+        NXTPushManager.init(cordovaActivity, mContext);
+      }
+      
       NXTReceiver.pushLog("NXTPush.init -> do last jscode: " + (jsCode == null ? "null" : jsCode));
       if(jsCode != null){ 
         HMPushPlugin.runJSOnUiThread(jsCode, false);
         jsCode = null;
       }
+      
       callbackContext.success(RomTypeUtil.isEMUI() ? "HW":"MI");
     } else {
       callbackContext.success("OTHER");
