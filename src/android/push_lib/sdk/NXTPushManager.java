@@ -41,8 +41,8 @@ public class NXTPushManager {
       }
     } else if (RomTypeUtil.isMIUI()) {
       NXTReceiver.pushLog("NXTPushManager.init --> MI");
-      nxtPushClient = new XiaomiPushClient();
-      nxtPushClient.registerPush(ctx);
+      // nxtPushClient = new XiaomiPushClient();
+      // nxtPushClient.registerPush(ctx);
     } else {
       NXTReceiver.pushLog("NXTPushManager.init --> NO");
     }

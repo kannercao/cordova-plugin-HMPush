@@ -39,6 +39,8 @@ public class XiaomiPushClient implements NXTPushClient {
 
         String strAppId = (appId == null) ? "" : appId.toString();
         String strAppKey = (appKey == null) ? "" : appKey.toString();
+        strAppId.replace("L", "");
+        strAppKey.replace("L", "");
 
         NXTReceiver.pushLog("AppId: " + strAppId);
         NXTReceiver.pushLog("AppKey: " + strAppKey);
