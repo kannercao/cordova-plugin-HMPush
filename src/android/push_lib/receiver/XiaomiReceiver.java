@@ -46,7 +46,7 @@ public class XiaomiReceiver extends PushMessageReceiver {
     List<String> arguments = message.getCommandArguments();
     String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
 
-    if ("command_register".equals(command)) {
+    if (MiPushClient.COMMAND_REGISTER.equals(command)) {
       SharedPreferences sharedPreference =
         context.getSharedPreferences(NXTReceiver.JINGOAL_PUSH_SP, Context.MODE_PRIVATE);
       SharedPreferences.Editor edit = sharedPreference.edit();
@@ -64,8 +64,21 @@ public class XiaomiReceiver extends PushMessageReceiver {
 
   @Override
   public void onReceiveRegisterResult(Context context, MiPushCommandMessage message) {
-    Log.i("小米onReceiveRegisterRt", message.toString());
-    super.onReceiveRegisterResult(context, message);
+    NXTReceiver.pushLog("XiaomiReceiver.onReceiveRegisterResult: " + message.toString());
+
+    String command = message.getCommand();
+    List<String> arguments = message.getCommandArguments();
+    String cmdArg1 = ((arguments != null && arguments.size() > 0) ? arguments.get(0) : null);
+    if (MiPushClient.COMMAND_REGISTER.equals(command)) {
+        if (message.getResultCode() == ErrorCode.SUCCESS) {
+          SharedPreferences sharedPreference =
+          context.getSharedPreferences(NXTReceiver.JINGOAL_PUSH_SP, Context.MODE_PRIVATE);
+          SharedPreferences.Editor edit = sharedPreference.edit();
+          edit.putString(NXTReceiver.SP_KEY_XIAOMI_TOKEN, cmdArg1);
+          edit.commit();
+        }
+    } 
+    // super.onReceiveRegisterResult(context, message);
   }
 
   /**
