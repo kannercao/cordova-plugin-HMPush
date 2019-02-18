@@ -28,15 +28,24 @@ public class XiaomiPushClient implements NXTPushClient {
   @Override
   public void registerPush(Context ctx) {
     try {
-      ApplicationInfo applicationInfo = ctx.getPackageManager()
-        .getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
+      ApplicationInfo applicationInfo = ctx.getPackageManager().getApplicationInfo(
+        ctx.getPackageName(), PackageManager.GET_META_DATA);
+
+      NXTReceiver.pushLog("PackageName: " + ctx.getPackageName());
+
       if (applicationInfo != null && applicationInfo.metaData != null) {
-        String appid = applicationInfo.metaData.getString(MI_PUSH_APPID);
-        String appkey = applicationInfo.metaData.getString(MI_PUSH_APPKEY);
-        if (!TextUtils.isEmpty(appid) && !TextUtils.isEmpty(appkey)) {
-          MiPushClient.registerPush(ctx, appid, appkey);
-        } else {
+        Object appId = applicationInfo.metaData.get("MI_PUSH_APPID");
+        Object appKey = applicationInfo.metaData.get("MI_PUSH_APPKEY");
+
+        String strAppId = (appId == null) ? "" : appId.toString();
+        String strAppKey = (appKey == null) ? "" : appKey.toString();
+
+        NXTReceiver.pushLog("AppId: " + strAppId);
+        NXTReceiver.pushLog("AppKey: " + strAppKey);
+        if (TextUtils.isEmpty(strAppId) || TextUtils.isEmpty(strAppKey)) {
           NXTReceiver.pushLog("AppId & Key empty...");
+        } else {
+          MiPushClient.registerPush(ctx, strAppId, strAppKey);
         }
       }
     } catch (Exception e) {
