@@ -3,6 +3,7 @@ package com.nxt.push.receiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import com.alibaba.fastjson.JSON;
 import android.util.Log;
 
 import com.xiaomi.mipush.sdk.ErrorCode;
@@ -12,6 +13,7 @@ import com.xiaomi.mipush.sdk.MiPushMessage;
 import com.xiaomi.mipush.sdk.PushMessageReceiver;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nxt.push.receiver.NXTReceiver;
 import com.eegrid.phonegap.JSRunner;
@@ -32,7 +34,12 @@ public class XiaomiReceiver extends PushMessageReceiver {
   @Override
   public void onNotificationMessageClicked(Context context, MiPushMessage message) {
     NXTReceiver.pushLog("XiaomiReceiver.onNotificationMessageClicked: " + message.toString());
-    JSRunner.onNotificationMessageClicked(message.getContent());
+    Map<String, String> extra = message.getExtra();
+    if(extra != null && extra.size() > 0){
+      String strExtra = JOSN.toJSONString(extra);
+      NXTReceiver.pushLog("XiaomiReceiver.onNotificationMessageClicked:strExtra-> " + strExtra);
+      JSRunner.onNotificationMessageClicked(strExtra);
+    }
   }
 
   /**
