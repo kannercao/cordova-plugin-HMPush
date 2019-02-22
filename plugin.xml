@@ -220,7 +220,6 @@
             <meta-data android:name="MI_PUSH_APPKEY" android:value="$MI_PUSH_APPKEY" />
             <!-- 小米推送SDK配置结束 -->
         </config-file>
-        <source-file src="src/android/libs/fastjson-1.2.38.jar" target-dir="libs" />
         <source-file src="src/android/libs/hmssdk-base-2.6.3.301.jar" target-dir="libs" />
         <source-file src="src/android/libs/hmssdk-push-2.6.3.301.jar" target-dir="libs" />
         <source-file src="src/android/libs/MiPush_SDK_Client_3_6_12.jar" target-dir="libs" />
