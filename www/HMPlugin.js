@@ -37,6 +37,10 @@ HMPlugin.prototype.getRegistrationID = function (successCallback) {
   this.callNative('getRegistrationID', [], successCallback)
 }
 
+HMPlugin.prototype.unRegisterPush = function () {
+  this.callNative('unRegisterPush', [], null)
+}
+
 HMPlugin.prototype.stopPush = function () {
   this.callNative('stopPush', [], null)
 }
@@ -49,9 +53,9 @@ HMPlugin.prototype.isPushStopped = function (successCallback) {
   this.callNative('isPushStopped', [], successCallback)
 }
 
-HMPlugin.prototype.clearLocalNotifications = function () {
+HMPlugin.prototype.getPushLogs = function (successCallback) {
   if (device.platform === 'Android') {
-    this.callNative('clearLocalNotifications', [], null)
+    this.callNative('getPushLogs', [], successCallback)
   }
 }
 
@@ -77,6 +81,10 @@ HMPlugin.prototype.setAlias = function (alias) {
   this.callNative('setAlias', [alias], null)
 }
 
+HMPlugin.prototype.deleteAlias = function (alias) {
+  this.callNative('deleteAlias', [alias], null)
+}
+
 // 判断系统设置中是否对本应用启用通知。
 // iOS: 返回值如果大于 0，代表通知开启；0: 通知关闭。
 //		UIRemoteNotificationTypeNone    = 0,
@@ -90,40 +98,6 @@ HMPlugin.prototype.getUserNotificationSettings = function (successCallback) {
     this.callNative('areNotificationEnabled', [], successCallback)
   }
 }
-
-// iOS methods
-HMPlugin.prototype.startJPushSDK = function () {
-  // this.callNative('startJPushSDK', [] , null)
-}
-
-HMPlugin.prototype.setBadge = function (value) {}
-
-HMPlugin.prototype.resetBadge = function () {}
-
-HMPlugin.prototype.setDebugModeFromIos = function () {}
-
-HMPlugin.prototype.setLogOFF = function () {}
-
-HMPlugin.prototype.setCrashLogON = function () {}
-
-HMPlugin.prototype.addLocalNotificationForIOS = function (delayTime, content,
-  badge, notificationID, extras) {}
-
-HMPlugin.prototype.deleteLocalNotificationWithIdentifierKeyInIOS = function (identifierKey) {}
-
-HMPlugin.prototype.clearAllLocalNotifications = function () {}
-
-HMPlugin.prototype.setLocation = function (latitude, longitude) {}
-
-HMPlugin.prototype.startLogPageView = function (pageName) {}
-
-HMPlugin.prototype.stopLogPageView = function (pageName) {}
-
-HMPlugin.prototype.beginLogPageView = function (pageName, duration) {}
-
-HMPlugin.prototype.setApplicationIconBadgeNumber = function (badge) {}
-
-HMPlugin.prototype.getApplicationIconBadgeNumber = function (callback) {}
 
 HMPlugin.prototype.addDismissActions = function (actions, categoryId) {
   this.callNative('addDismissActions', [actions, categoryId])
@@ -162,14 +136,6 @@ HMPlugin.prototype.receiveMessageInAndroidCallback = function (data) {
   cordova.fireDocumentEvent('npush.receiveMessage', this.receiveMessage)
 }
 
-// HMPlugin.prototype.openNotificationInAndroidCallback = function (data) {
-//   data = JSON.stringify(data)
-//   console.log('HMPlugin:openNotificationInAndroidCallback: ' + data)
-//   this.openNotification = JSON.parse(data)
-//   cordova.fireDocumentEvent('jpush.openNotification', this.openNotification)
-// }
-
-
 HMPlugin.prototype.openNotificationInAndroidCallback = function (data) {
   data = JSON.stringify(data)
   console.log('HMPlugin:openNotificationInAndroidCallback: ' + data)
@@ -185,14 +151,6 @@ HMPlugin.prototype.openNotificationInAndroidCallback = function (data) {
   }
   cordova.fireDocumentEvent('npush.openNotification', this.openNotification)
 }
-
-
-// HMPlugin.prototype.receiveNotificationInAndroidCallback = function (data) {
-//   data = JSON.stringify(data)
-//   console.log('HMPlugin:receiveNotificationInAndroidCallback: ' + data)
-//   this.receiveNotification = JSON.parse(data)
-//   cordova.fireDocumentEvent('jpush.receiveNotification', this.receiveNotification)
-// }
 
 HMPlugin.prototype.receiveNotificationInAndroidCallback = function (data) {
   data = JSON.stringify(data)

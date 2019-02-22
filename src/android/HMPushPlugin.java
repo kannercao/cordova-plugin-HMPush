@@ -61,51 +61,55 @@ public class HMPushPlugin extends CordovaPlugin {
   @Override
   public boolean execute(final String action, final JSONArray data, final CallbackContext callbackContext)
       throws JSONException {
-      cordova.getThreadPool().execute(new Runnable() {
-        @Override
-        public void run() {
-          try {
-            Method method = HMPushPlugin.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class);
-            method.invoke(HMPushPlugin.this, data, callbackContext);
-          } catch (Exception e) {
-            NXTReceiver.pushLog(e.toString());
-          }
+    cordova.getThreadPool().execute(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Method method = HMPushPlugin.class.getDeclaredMethod(action, JSONArray.class, CallbackContext.class);
+          method.invoke(HMPushPlugin.this, data, callbackContext);
+        } catch (Exception e) {
+          NXTReceiver.pushLog(e.toString());
         }
-      });
+      }
+    });
 
     return true;
   }
 
   void init(JSONArray data, CallbackContext callbackContext) {
     if (RomTypeUtil.isEMUI() || RomTypeUtil.isMIUI()) {
-      // 注册华为和小米
-      if(RomTypeUtil.isEMUI()){
+      if (RomTypeUtil.isEMUI()) {
         NXTPushManager.init(cordovaActivity, mContext);
       }
-
       NXTReceiver.pushLog("NXTPush.init -> do last jscode: " + (jsCode == null ? "null" : jsCode));
-      if(jsCode != null){ 
+      if (jsCode != null) {
         HMPushPlugin.runJSOnUiThread(jsCode, false);
         jsCode = null;
       }
-      
-      callbackContext.success(RomTypeUtil.isEMUI() ? "HW":"MI");
+      callbackContext.success(RomTypeUtil.isEMUI() ? "HW" : "MI");
     } else {
       callbackContext.success("OTHER");
     }
   }
 
   void setTags(JSONArray data, CallbackContext callbackContext) {
-
   }
 
   void setAlias(JSONArray data, CallbackContext callbackContext) {
     try {
-        // 注册华为与小米
-        NXTPushManager.setAlias(mContext, "USELESS", data.getString(0));
+      // 注册华为与小米
+      NXTPushManager.setAlias(mContext, "USELESS", data.getString(0));
     } catch (JSONException e) {
       e.printStackTrace();
-      callbackContext.error("Error reading HMPushPlugin setAlias JSON");
+    }
+  }
+
+  void deleteAlias(JSONArray data, CallbackContext callbackContext) {
+    try {
+      // 注册华为与小米
+      NXTPushManager.deleteAlias(mContext, "USELESS", data.getString(0));
+    } catch (JSONException e) {
+      e.printStackTrace();
     }
   }
 
@@ -113,6 +117,13 @@ public class HMPushPlugin extends CordovaPlugin {
    * 极光专有方法开始
    */
   void setDebugMode(JSONArray data, CallbackContext callbackContext) {
+    boolean mode;
+    try {
+      mode = data.getBoolean(0);
+      NXTReceiver.gsIsDebug = mode;
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
   }
 
   void stopPush(JSONArray data, CallbackContext callbackContext) {
@@ -125,79 +136,29 @@ public class HMPushPlugin extends CordovaPlugin {
 
   // 借这个接口获取插件日志
   boolean isPushStopped(JSONArray data, CallbackContext callbackContext) {
-    String logs = NXTPushManager.getPluginLog();
-    callbackContext.success(logs);
+    callbackContext.success(false);
     return false;
   }
 
-  void setLatestNotificationNum(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setPushTime(JSONArray data, CallbackContext callbackContext) {
-
+  void getPushLogs(JSONArray data, CallbackContext callbackContext) {
+    String logs = NXTPushManager.getPluginLog();
+    callbackContext.success(logs);
   }
 
   void getRegistrationID(JSONArray data, CallbackContext callbackContext) {
     if (RomTypeUtil.isEMUI() || RomTypeUtil.isMIUI()) {
       String hwToken = NXTPushManager.getToken(mContext);
       callbackContext.success(hwToken);
-    }else{
+    } else {
       callbackContext.success("not support phone.");
     }
   }
 
-  void onResume(JSONArray data, CallbackContext callbackContext) {
-
+  void unRegisterPush(JSONArray data, CallbackContext callbackContext) {
+    NXTPushManager.unRegisterPush(mContext);
   }
 
-  void onPause(JSONArray data, CallbackContext callbackContext) {
 
-  }
-
-  void reportNotificationOpened(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setTagsWithAlias(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setBasicPushNotificationBuilder(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setCustomPushNotificationBuilder(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void clearAllNotification(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void clearNotificationById(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void addLocalNotification(JSONArray data, CallbackContext callbackContext) throws JSONException {
-
-  }
-
-  void removeLocalNotification(JSONArray data, CallbackContext callbackContext) throws JSONException {
-
-  }
-
-  void clearLocalNotifications(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setStatisticsOpen(JSONArray data, CallbackContext callbackContext) {
-
-  }
-
-  void setSilenceTime(JSONArray data, CallbackContext callbackContext) {
-
-  }
 
   /**
    * 用于 Android 6.0 以上系统申请权限，具体可参考：
@@ -214,7 +175,9 @@ public class HMPushPlugin extends CordovaPlugin {
    */
   public static void runJSOnUiThread(final String js, boolean isNeedCatch) {
     if (instance == null) {
-      if(isNeedCatch) jsCode = js;
+      if (isNeedCatch) {
+        jsCode = js;
+      }
       return;
     }
     cordovaActivity.runOnUiThread(new Runnable() {
@@ -245,28 +208,27 @@ public class HMPushPlugin extends CordovaPlugin {
   private boolean hasPermission(String appOpsServiceId) {
     Context context = cordova.getActivity().getApplicationContext();
     if (Build.VERSION.SDK_INT >= 24) {
-        NotificationManager mNotificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        return mNotificationManager.areNotificationsEnabled();
+      NotificationManager mNotificationManager = (NotificationManager) context
+          .getSystemService(Context.NOTIFICATION_SERVICE);
+      return mNotificationManager.areNotificationsEnabled();
     } else {
-        AppOpsManager mAppOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        ApplicationInfo appInfo = context.getApplicationInfo();
+      AppOpsManager mAppOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+      ApplicationInfo appInfo = context.getApplicationInfo();
 
-        String pkg = context.getPackageName();
-        int uid = appInfo.uid;
-        Class appOpsClazz;
+      String pkg = context.getPackageName();
+      int uid = appInfo.uid;
+      Class appOpsClazz;
 
-        try {
-            appOpsClazz = Class.forName(AppOpsManager.class.getName());
-            Method checkOpNoThrowMethod = appOpsClazz.getMethod("checkOpNoThrow", Integer.TYPE, Integer.TYPE,
-                    String.class);
-            Field opValue = appOpsClazz.getDeclaredField(appOpsServiceId);
-            int value = opValue.getInt(Integer.class);
-            Object result = checkOpNoThrowMethod.invoke(mAppOps, value, uid, pkg);
-            return Integer.parseInt(result.toString()) == AppOpsManager.MODE_ALLOWED;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
+      try {
+        appOpsClazz = Class.forName(AppOpsManager.class.getName());
+        Method checkOpNoThrowMethod = appOpsClazz.getMethod("checkOpNoThrow", Integer.TYPE, Integer.TYPE, String.class);
+        Field opValue = appOpsClazz.getDeclaredField(appOpsServiceId);
+        int value = opValue.getInt(Integer.class);
+        Object result = checkOpNoThrowMethod.invoke(mAppOps, value, uid, pkg);
+        return Integer.parseInt(result.toString()) == AppOpsManager.MODE_ALLOWED;
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
 
     return false;

@@ -62,7 +62,6 @@ public class NXTPushManager {
    **/
   public static void stopPush(Context ctx) {
     if (nxtPushClient != null) {
-      Log.i("推送设置:", "您关闭了 华为/小米 推送");
       nxtPushClient.stopPush(ctx);
     }
   }
@@ -72,7 +71,6 @@ public class NXTPushManager {
    **/
   public static void resumePush(Context ctx) {
     if (nxtPushClient != null) {
-      Log.i("推送设置:", "您开启了 华为/小米 推送");
       nxtPushClient.resumePush(ctx);
     }
   }
@@ -86,11 +84,8 @@ public class NXTPushManager {
    **/
   public static void setAlias(Context context, String deviceId, String alias) {
     if (nxtPushClient != null) {
-      Log.i("小米华为设置别名", "========================");
       nxtPushClient.setAlias(context, deviceId, alias);
-    } else {
-      Log.i("小米设置别名nxtPushClient不存在", "========================");
-    }
+    } 
   }
 
   /**
