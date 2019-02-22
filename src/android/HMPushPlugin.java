@@ -136,7 +136,7 @@ public class HMPushPlugin extends CordovaPlugin {
 
   // 借这个接口获取插件日志
   boolean isPushStopped(JSONArray data, CallbackContext callbackContext) {
-    callbackContext.success(false);
+    callbackContext.success(0);
     return false;
   }
 
