@@ -82,7 +82,7 @@ public class HMPushPlugin extends CordovaPlugin {
       if(RomTypeUtil.isEMUI()){
         NXTPushManager.init(cordovaActivity, mContext);
       }
-      
+
       NXTReceiver.pushLog("NXTPush.init -> do last jscode: " + (jsCode == null ? "null" : jsCode));
       if(jsCode != null){ 
         HMPushPlugin.runJSOnUiThread(jsCode, false);

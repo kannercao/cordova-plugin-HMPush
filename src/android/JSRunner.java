@@ -3,6 +3,11 @@ package com.eegrid.phonegap;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import com.nxt.push.receiver.NXTReceiver;
 
 import org.json.JSONException;
@@ -30,7 +35,7 @@ public class JSRunner  {
   }
 
   /**
-   * 小米/华为 通知栏消息被点击（事实上，不仅仅包括被点击的消息 ）
+   * 华为 通知栏消息被点击
    *
    * @param context
    * @param message 收到的具体的消息内容
@@ -47,6 +52,42 @@ public class JSRunner  {
       e.printStackTrace();
     }
   }
+
+  /**
+   * 小米 通知栏消息被点击
+   *
+   * @param context
+   * @param message 收到的具体的消息内容
+   */
+  public static void onNotificationMessageClicked(Map<String, String> extras) {
+    String format = "window.plugins.HMPlugin.openNotificationInAndroidCallback(%s);";
+    JSONObject data = getExtrasObject(extras);
+    NXTReceiver.pushLog("JSRunner.onNotificationMessageClicked: " + data.toString());
+    final String js = String.format(format, data.toString());
+    HMPushPlugin.runJSOnUiThread(js, true);
+  }
+
+  /**
+   * 获取JSON数据对象
+   *
+   * @param extras 扩展数据
+   */
+  private static JSONObject getExtrasObject(Map<String, String> extras) {
+    JSONObject data = new JSONObject();
+    try {
+        JSONObject jExtras = new JSONObject();
+        for (Entry<String, String> entry : extras.entrySet()) {
+            jExtras.put(entry.getKey(), entry.getValue());
+        }
+        if (jExtras.length() > 0) {
+            data.put("extras", jExtras);
+        }
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+    return data;
+  }
+
 
 
   /**
